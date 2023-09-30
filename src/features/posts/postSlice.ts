@@ -4,9 +4,21 @@ import { IPost } from "../../typings";
 
 interface IAllPosts {
   allPosts: IPost[];
+  currentPost: IPost;
 }
 
-const initialState: IAllPosts = { allPosts: [] };
+const defaultCurrentPost: IPost = {
+  id: 0,
+  title: "",
+  content: "",
+  voteCount: 0,
+  isFavorite: false,
+};
+
+const initialState: IAllPosts = {
+  allPosts: [],
+  currentPost: defaultCurrentPost,
+};
 
 export const postSlice = createSlice({
   name: "all-posts",
@@ -42,12 +54,21 @@ export const postSlice = createSlice({
       });
       state.allPosts = updatedPosts;
     },
+    setCurrentPost: (state, action: { payload: IPost }) => {
+      state.currentPost = action.payload;
+      return state;
+    },
   },
 });
 
 export const selectAllPosts = (state: RootState) => state.posts;
 
-export const { saveBlogPost, upvotePost, downvotePost, toggleFavorite } =
-  postSlice.actions;
+export const {
+  saveBlogPost,
+  upvotePost,
+  downvotePost,
+  toggleFavorite,
+  setCurrentPost,
+} = postSlice.actions;
 
 export default postSlice.reducer;
