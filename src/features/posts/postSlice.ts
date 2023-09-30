@@ -74,6 +74,12 @@ export const postSlice = createSlice({
       });
       state.allPosts = updatedPosts;
     },
+    deletePost: (state, actions: { payload: number }) => {
+      const updatedPosts = state.allPosts.filter((post) => {
+        return post.id !== actions.payload;
+      });
+      state.allPosts = updatedPosts;
+    },
   },
 });
 
@@ -86,6 +92,7 @@ export const {
   toggleFavorite,
   setCurrentPost,
   updateBlogPost,
+  deletePost,
 } = postSlice.actions;
 
 export default postSlice.reducer;
