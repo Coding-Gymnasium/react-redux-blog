@@ -1,6 +1,10 @@
 import { IPost } from "../../typings";
 
+import { downvotePost, upvotePost } from "./postSlice";
+import { useAppDispatch } from "../../app/hooks";
+
 const BlogCard = (props: { posts: IPost[] }) => {
+  const dispatch = useAppDispatch();
   return (
     <>
       {props.posts.map((post) => {
@@ -27,9 +31,19 @@ const BlogCard = (props: { posts: IPost[] }) => {
                 <span className="favorite">♥</span>
               </section>
               <section className="rating-section">
-                <span className="upvote">⇧</span>
-                <span className="vote-counter">0</span>
-                <span className="downvote">⇩</span>
+                <span
+                  className="upvote"
+                  onClick={() => dispatch(upvotePost(post.id))}
+                >
+                  ⇧
+                </span>
+                <span className="vote-counter">{post.voteCount}</span>
+                <span
+                  className="downvote"
+                  onClick={() => dispatch(downvotePost(post.id))}
+                >
+                  ⇩
+                </span>
               </section>
             </section>
           </section>
