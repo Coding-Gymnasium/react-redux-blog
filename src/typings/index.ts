@@ -5,3 +5,12 @@ export interface IPost {
   voteCount: number;
   isFavorite: boolean;
 }
+
+export interface INavigationState {
+  currentComponent:
+    | "AllPostsComponent"
+    | "AddNewPostComponent"
+    | "FavoriteComponent"
+    | "EditPostComponent"
+    | "ViewPostComponent";
+}
