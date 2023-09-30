@@ -85,6 +85,11 @@ export const postSlice = createSlice({
 
 export const selectAllPosts = (state: RootState) => state.posts;
 
+export const selectAllFavoritePosts = (state: RootState) =>
+  state.posts.allPosts.filter((post) => {
+    return post.isFavorite === true;
+  });
+
 export const {
   saveBlogPost,
   upvotePost,
